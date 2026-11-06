@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+<rect x="0" y="0" width="1920" height="1080" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="2"/>
+<text x="80" y="87" font-family="Open Sans,Arial,sans-serif" font-size="26" font-weight="700" fill="#64748b" text-anchor="start">SMART DIVE</text>
+<text x="80" y="151" font-family="Open Sans,Arial,sans-serif" font-size="50" font-weight="700" fill="#0f172a" text-anchor="start">Explore. Understand. Reserve.</text>
+<text x="80" y="197" font-family="Open Sans,Arial,sans-serif" font-size="27" font-weight="400" fill="#64748b" text-anchor="start">Simple architecture</text>
+<rect x="1040" y="65" width="800" height="935" rx="28" fill="#f5f8fc" stroke="#dbe3ec" stroke-width="2"/>
+<text x="1080" y="115" font-family="Open Sans,Arial,sans-serif" font-size="27" font-weight="700" fill="#64748b" text-anchor="start">AWS services</text>
+<rect x="80" y="330" width="350" height="160" rx="22" fill="#fff" stroke="#dbe3ec" stroke-width="2"/>
+<rect x="81" y="350" width="6" height="120" rx="3" fill="#2563eb" stroke="#2563eb" stroke-width="2"/>
+<text x="107" y="378" font-family="Open Sans,Arial,sans-serif" font-size="32" font-weight="700" fill="#0f172a" text-anchor="start">Even G2 + R1</text>
+<text x="107" y="418" font-family="Open Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#334155" text-anchor="start">Display + ring controls</text>
+<rect x="565" y="330" width="360" height="190" rx="22" fill="#fff" stroke="#dbe3ec" stroke-width="2"/>
+<rect x="566" y="350" width="6" height="150" rx="3" fill="#2563eb" stroke="#2563eb" stroke-width="2"/>
+<text x="592" y="378" font-family="Open Sans,Arial,sans-serif" font-size="32" font-weight="700" fill="#0f172a" text-anchor="start">Even App / Web</text>
+<text x="592" y="418" font-family="Open Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#334155" text-anchor="start">Runs the cockpit</text>
+<text x="592" y="452" font-family="Open Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#334155" text-anchor="start">Decrypts + holds token</text>
+<rect x="565" y="690" width="360" height="210" rx="22" fill="#fff" stroke="#dbe3ec" stroke-width="2"/>
+<rect x="566" y="710" width="6" height="170" rx="3" fill="#d97706" stroke="#d97706" stroke-width="2"/>
+<text x="592" y="738" font-family="Open Sans,Arial,sans-serif" font-size="31" font-weight="700" fill="#0f172a" text-anchor="start">Smart Dive Connect</text>
+<text x="592" y="778" font-family="Open Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#334155" text-anchor="start">iPhone helper app</text>
+<text x="592" y="812" font-family="Open Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#334155" text-anchor="start">Obtain + encrypt token</text>
+<rect x="80" y="690" width="350" height="210" rx="22" fill="#fff" stroke="#dbe3ec" stroke-width="2"/>
+<rect x="81" y="710" width="6" height="170" rx="3" fill="#d97706" stroke="#d97706" stroke-width="2"/>
+<text x="107" y="738" font-family="Open Sans,Arial,sans-serif" font-size="32" font-weight="700" fill="#0f172a" text-anchor="start">AWS Events OAuth</text>
+<text x="107" y="778" font-family="Open Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#334155" text-anchor="start">Builder ID sign-in</text>
+<text x="107" y="812" font-family="Open Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#334155" text-anchor="start">Authorization endpoint</text>
+<text x="107" y="846" font-family="Open Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#334155" text-anchor="start">Token endpoint</text>
+<rect x="1120" y="160" width="640" height="125" rx="22" fill="#fff" stroke="#dbe3ec" stroke-width="2"/>
+<rect x="1121" y="180" width="6" height="85" rx="3" fill="#2563eb" stroke="#2563eb" stroke-width="2"/>
+<text x="1147" y="208" font-family="Open Sans,Arial,sans-serif" font-size="32" font-weight="700" fill="#0f172a" text-anchor="start">S3 + CloudFront</text>
+<text x="1147" y="248" font-family="Open Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#334155" text-anchor="start">Host the cockpit</text>
+<rect x="1120" y="390" width="640" height="170" rx="22" fill="#fff" stroke="#dbe3ec" stroke-width="2"/>
+<rect x="1121" y="410" width="6" height="130" rx="3" fill="#2563eb" stroke="#2563eb" stroke-width="2"/>
+<text x="1147" y="438" font-family="Open Sans,Arial,sans-serif" font-size="32" font-weight="700" fill="#0f172a" text-anchor="start">API Gateway + Lambda</text>
+<text x="1147" y="478" font-family="Open Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#334155" text-anchor="start">Sessions + confirmed reservations</text>
+<text x="1147" y="512" font-family="Open Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#334155" text-anchor="start">Token handoff + AI requests</text>
+<rect x="1120" y="665" width="275" height="150" rx="22" fill="#fff" stroke="#dbe3ec" stroke-width="2"/>
+<rect x="1121" y="685" width="6" height="110" rx="3" fill="#059669" stroke="#059669" stroke-width="2"/>
+<text x="1147" y="713" font-family="Open Sans,Arial,sans-serif" font-size="32" font-weight="700" fill="#0f172a" text-anchor="start">DynamoDB</text>
+<text x="1147" y="753" font-family="Open Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#334155" text-anchor="start">Encrypted handoff</text>
+<text x="1147" y="787" font-family="Open Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#334155" text-anchor="start">AI jobs + results</text>
+<rect x="1490" y="665" width="270" height="165" rx="22" fill="#fff" stroke="#dbe3ec" stroke-width="2"/>
+<rect x="1491" y="685" width="6" height="125" rx="3" fill="#7c3aed" stroke="#7c3aed" stroke-width="2"/>
+<text x="1517" y="713" font-family="Open Sans,Arial,sans-serif" font-size="32" font-weight="700" fill="#0f172a" text-anchor="start">AI worker</text>
+<text x="1517" y="753" font-family="Open Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#334155" text-anchor="start">Lambda + Bedrock</text>
+<text x="1517" y="787" font-family="Open Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#334155" text-anchor="start">Nova 2 Lite</text>
+<rect x="1120" y="885" width="640" height="95" rx="22" fill="#fff" stroke="#dbe3ec" stroke-width="2"/>
+<rect x="1121" y="905" width="6" height="55" rx="3" fill="#2563eb" stroke="#2563eb" stroke-width="2"/>
+<text x="1147" y="933" font-family="Open Sans,Arial,sans-serif" font-size="32" font-weight="700" fill="#0f172a" text-anchor="start">AWS Events API</text>
+<polyline points="430,410 565,410" fill="none" stroke="#2563eb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="565,410 549,402 549,418" fill="#2563eb"/>
+<polygon points="430,410 446,418 446,402" fill="#2563eb"/>
+<text x="497" y="312" font-family="Open Sans,Arial,sans-serif" font-size="24" font-weight="400" fill="#2563eb" text-anchor="middle">View / select</text>
+<polyline points="1120,235 1000,235 1000,350 925,350" fill="none" stroke="#2563eb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="925,350 941,358 941,342" fill="#2563eb"/>
+<text x="944" y="219" font-family="Open Sans,Arial,sans-serif" font-size="24" font-weight="400" fill="#2563eb" text-anchor="start">Web assets</text>
+<polyline points="925,445 1120,445" fill="none" stroke="#2563eb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1120,445 1104,437 1104,453" fill="#2563eb"/>
+<polygon points="925,445 941,453 941,437" fill="#2563eb"/>
+<text x="1022" y="426" font-family="Open Sans,Arial,sans-serif" font-size="24" font-weight="400" fill="#2563eb" text-anchor="middle">API + token</text>
+<polyline points="925,775 1000,775 1000,515 1120,515" fill="none" stroke="#059669" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1120,515 1104,507 1104,523" fill="#059669"/>
+<text x="650" y="647" font-family="Open Sans,Arial,sans-serif" font-size="24" font-weight="400" fill="#059669" text-anchor="start">Encrypted token handoff</text>
+<polyline points="1120,495 925,495" fill="none" stroke="#059669" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="925,495 941,503 941,487" fill="#059669"/>
+<text x="1022" y="480" font-family="Open Sans,Arial,sans-serif" font-size="21" font-weight="400" fill="#059669" text-anchor="middle">Encrypted token</text>
+<polyline points="565,760 430,760" fill="none" stroke="#d97706" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="430,760 446,768 446,752" fill="#d97706"/>
+<text x="497" y="744" font-family="Open Sans,Arial,sans-serif" font-size="19" font-weight="400" fill="#b45309" text-anchor="middle">Sign in + PKCE</text>
+<polyline points="430,835 565,835" fill="none" stroke="#d97706" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="565,835 549,827 549,843" fill="#d97706"/>
+<text x="497" y="819" font-family="Open Sans,Arial,sans-serif" font-size="19" font-weight="400" fill="#b45309" text-anchor="middle">Access token</text>
+<text x="565" y="949" font-family="Open Sans,Arial,sans-serif" font-size="21" font-weight="400" fill="#475569" text-anchor="start">Connection code = handoff ID + encryption key</text>
+<polyline points="1258,560 1258,665" fill="none" stroke="#059669" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1258,665 1266,649 1250,649" fill="#059669"/>
+<polygon points="1258,560 1250,576 1266,576" fill="#059669"/>
+<text x="1150" y="623" font-family="Open Sans,Arial,sans-serif" font-size="23" font-weight="400" fill="#059669" text-anchor="start">State</text>
+<polyline points="1625,560 1625,665" fill="none" stroke="#7c3aed" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1625,665 1633,649 1617,649" fill="#7c3aed"/>
+<polygon points="1625,560 1617,576 1633,576" fill="#7c3aed"/>
+<text x="1643" y="623" font-family="Open Sans,Arial,sans-serif" font-size="23" font-weight="400" fill="#7c3aed" text-anchor="start">AI explanations</text>
+<polyline points="1442,560 1442,885" fill="none" stroke="#2563eb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1442,885 1450,869 1434,869" fill="#2563eb"/>
+<polygon points="1442,560 1434,576 1450,576" fill="#2563eb"/>
+<text x="1470" y="867" font-family="Open Sans,Arial,sans-serif" font-size="23" font-weight="400" fill="#2563eb" text-anchor="start">Sessions + reservations</text>
+<text x="80" y="1032" font-family="Open Sans,Arial,sans-serif" font-size="24" font-weight="400" fill="#475569" text-anchor="start">The cockpit runs on the phone or in a browser. G2 displays the output; R1 controls selection.</text>
+<text x="80" y="1066" font-family="Open Sans,Arial,sans-serif" font-size="21" font-weight="400" fill="#64748b" text-anchor="start">Connection codes pair the apps. Access tokens authorize API calls. Supporting validation calls are omitted.</text>
+</svg>

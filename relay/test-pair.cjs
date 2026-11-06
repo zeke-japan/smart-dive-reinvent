@@ -1,0 +1,23 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),{webcrypto,createCipheriv,randomBytes}=require('node:crypto');const {makeHandler}=require('./index.js');
+(async()=>{
+ const {newPairing,readPairing}=await import('data:text/javascript;base64,'+fs.readFileSync(__dirname+'/../SmartDiveAuth/Web/pairing.js').toString('base64'));
+ const pair=newPairing();assert.match(pair.code,/^sd1\.[a-f0-9]{32}\.[a-f0-9]{64}$/);const relay='https://test.execute-api.ap-northeast-1.amazonaws.com';let clock=Date.now();const token='x.'+Buffer.from(JSON.stringify({exp:Math.floor(clock/1000)+3600})).toString('base64url')+'.x';
+ const record={relay,accessToken:token,expiresAt:clock+3600000};const nonce=randomBytes(12),cipher=createCipheriv('aes-256-gcm',Buffer.from(pair.key,'hex'),nonce);cipher.setAAD(Buffer.from(pair.id));const encrypted=Buffer.concat([nonce,cipher.update(JSON.stringify(record)),cipher.final(),cipher.getAuthTag()]).toString('base64');
+ const map=new Map();const store={async get(k){return structuredClone(map.get(k))},async put(k,v,n){if(n&&map.has(k))return false;map.set(k,structuredClone(v));return true}};let authCalls=0;
+ const h=makeHandler({store,now:()=>clock,request:async()=>{authCalls++;return {ok:true,json:async()=>({schedule:{reserved:[],favorites:[],personalTime:[]}})}}});
+ const get={rawPath:'/pair',requestContext:{http:{method:'GET'}},queryStringParameters:{slot:pair.id}},post={rawPath:'/pair',requestContext:{http:{method:'POST'}},headers:{authorization:'Bearer '+token},body:JSON.stringify({slot:pair.id,sealed:encrypted})};
+ assert.equal(JSON.parse((await h(get)).body).status,'pending');assert.equal(authCalls,0);
+ assert.equal((await h({...post,headers:{}})).statusCode,401);assert.equal((await h(post)).statusCode,200);assert.equal(authCalls,1);
+ assert.ok(!JSON.stringify([...map.values()]).includes(token));assert.ok(!JSON.stringify([...map.values()]).includes(pair.key));
+ const native=global.fetch;global.fetch=async(url,o)=>{assert.equal(o.credentials,'omit');assert.ok(!o.headers);const r=await h({...get,queryStringParameters:{slot:new URL(url).searchParams.get('slot')}});return {ok:r.statusCode===200,status:r.statusCode,json:async()=>JSON.parse(r.body)}};
+ assert.deepEqual(await readPairing(relay,pair),record);
+ await assert.rejects(readPairing(relay,{...pair,key:'0'.repeat(64)}));
+ const saved=map.get('pair:'+pair.id).sealed;map.get('pair:'+pair.id).sealed=saved.slice(0,10)+'AAAA'+saved.slice(14);await assert.rejects(readPairing(relay,pair));map.get('pair:'+pair.id).sealed=saved;
+ clock+=11000;assert.equal((await h(post)).statusCode,409);
+ clock+=121000;assert.equal(JSON.parse((await h(get)).body).status,'pending');assert.equal(await readPairing(relay,pair),null);
+ assert.equal((await h({...get,queryStringParameters:{slot:'../x'}})).statusCode,400);
+ assert.equal((await h({...post,body:JSON.stringify({slot:pair.id,sealed:encrypted,token})})).statusCode,400);
+ await assert.rejects(readPairing(relay,{...pair,createdAt:Date.now()-600001}),/expired/);global.fetch=native;
+ const t=JSON.parse(fs.readFileSync(__dirname+'/template.json'));assert.equal(t.Resources.PairRoute.Properties.RouteKey,'POST /pair');assert.equal(t.Resources.PairResultRoute.Properties.RouteKey,'GET /pair');assert.ok(t.Conditions.HasWebOrigin);assert.equal(t.Resources.Api.Properties.CorsConfiguration.AllowOrigins['Fn::If'][0],'HasWebOrigin');
+ console.log('PASS AES-GCM combined layout/AAD roundtrip, authenticated writes, encrypted-only persistence, wrong key/tampering rejected, missing and expired slots, bounded code lifetime, duplicate write blocked, fixed CORS/routes. Swift CryptoKit build still requires Xcode.');
+})().catch(e=>{console.error(e);process.exit(1)});

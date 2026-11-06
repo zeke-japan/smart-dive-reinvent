@@ -1,0 +1,12 @@
+{
+  "name": "smart-dive-iphone-g2-cockpit",
+  "version": "0.9.4",
+  "private": true,
+  "scripts": {
+    "test": "node relay/test-relay.cjs && node relay/test-ai.cjs && node relay/test-pair.cjs && node --experimental-vm-modules relay/test-web.mjs && node --experimental-vm-modules relay/test-ui.mjs && node relay/test-discovery.cjs",
+    "release:check": "node relay/build-template.cjs && node hosting/build.cjs && npm test"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "0.1.100"
+  }
+}

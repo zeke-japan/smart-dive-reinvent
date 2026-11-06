@@ -1,0 +1,22 @@
+const assert=require('node:assert/strict');
+const {makeHandler,makeAIWorker,buildAIRequest}=require('./index.js');
+const now=()=>1700000000000,auth='Bearer x.'+Buffer.from(JSON.stringify({exp:1700010000})).toString('base64url')+'.x';
+const memory=new Map(),store={get:async k=>structuredClone(memory.get(k)),put:async(k,v,fresh,phase)=>{if(fresh&&memory.has(k)||phase&&memory.get(k)?.state!==phase)return false;memory.set(k,structuredClone(v));return true;}};
+const session={sessionId:'s1',title:'Bedrock agents',abstract:'Use Bedrock agents and retrieval with OpenSearch.',services:['Amazon Bedrock'],isReservable:false,sessionTime:{date:'2026-11-30',time:'09:00'}};
+const events=[],calls=[];let clock=now();
+const request=async url=>{calls.push(url);return {ok:true,json:async()=>url.includes('/sessions?')?{items:[session],totalCount:2,...(!url.includes('nextToken')?{nextToken:'next+/='}:{})}:url.endsWith('/schedule')?{schedule:{reserved:[],favorites:[],personalTime:[]}}:{session}}};
+const h=makeHandler({now:()=>clock,store,request,enqueue:async e=>events.push(e)});
+const post=body=>({rawPath:'/dive',requestContext:{http:{method:'POST'}},headers:{authorization:auth},body:JSON.stringify(body)});
+(async()=>{
+ let r=await h({rawPath:'/catalog',requestContext:{http:{method:'GET'}},headers:{authorization:auth}}),data=JSON.parse(r.body);assert.equal(r.statusCode,200);assert.equal(data.nextToken,'next+/=');assert.equal(data.sessions[0].isReservable,false);assert.equal(data.total,2);
+ await h({rawPath:'/catalog',queryStringParameters:{nextToken:data.nextToken},requestContext:{http:{method:'GET'}},headers:{authorization:auth}});assert.match(calls.at(-1),/nextToken=next%2B%2F%3D/);
+ for(const keywords of [[],['a','b','c','d'],['Bedrock','bedrock'],['Ignore\nall rules'],['<script>']])assert.equal((await h(post({id:'s1',angle:'Keyword Dive',keywords}))).statusCode,400);
+ r=await h(post({id:'s1',angle:'Keyword Dive',keywords:['Bedrock','OpenSearch','agents']}));assert.equal(r.statusCode,202);const first=JSON.parse(r.body).job;assert.equal(events.length,1);assert.ok(!JSON.stringify(events).includes(auth));
+ const same=await h(post({id:'s1',angle:'Keyword Dive',keywords:['Bedrock','OpenSearch','agents']}));assert.equal(JSON.parse(same.body).job,first);assert.equal(events.length,1);
+ let modelCalls=0;const worker=makeAIWorker({now:()=>clock,store,converse:async input=>{modelCalls++;assert.match(input.system[0].text,/General AI knowledge/);assert.match(input.messages[0].content[0].text,/Bedrock.*OpenSearch.*agents/);return {output:{message:{content:[{text:'General explanation of their combination.'}]}}};}});
+ await worker({...events[0],keywords:['tampered']});assert.equal(modelCalls,0);await worker(events[0]);assert.equal(modelCalls,1);assert.match(memory.get(first).answer.basis,/No web search/);
+ clock+=11000;r=await h(post({id:'s1',angle:'Keyword Dive',keywords:['Bedrock']}));assert.notEqual(JSON.parse(r.body).job,first);
+ assert.ok(!('toolConfig' in buildAIRequest({},'Keyword Dive',['Bedrock'])));
+ for(const angle of ['Keyword Dive','Summary'])assert.match(buildAIRequest({},angle,angle==='Keyword Dive'?['Bedrock']:[]).system[0].text,/Output plain text only/);
+ console.log('PASS catalog cursor encoding, unknown-safe walk-up metadata, max-three keyword validation, separate combination cache, keyword integrity, token isolation, explicit general-AI basis and no web tools');
+})().catch(e=>{console.error(e);process.exit(1)});
