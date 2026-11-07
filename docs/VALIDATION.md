@@ -21,3 +21,17 @@ npm run release:check
 ```
 
 Tests generate ignored root PNGs from synthetic fixtures. Curated docs/images previews contain no attendee data. The live URL and TestFlight status must not be inferred from this archive. See RELEASE-0.9.4.md for deployment and recording checks.
+
+## Submission video evidence reviewed on 2026-11-07
+
+[Demo video](https://www.youtube.com/watch?v=8uWp1-DsD6g). The supplied final video file was visually reviewed at the following approximate offsets:
+
+- 00:03–00:19: physical G2/R1/iPhone setup and a view through a glasses lens. This does not identify the hardware-tested build.
+- 02:54–02:56: AIM326-R returns `Not reserved. sessionFull`.
+- 03:04: AIM408-R returns `Reserved. Verified in your schedule.`
+- 03:16: the cockpit Schedule displays AIM408-R.
+- 03:36–03:40: the official Events calendar shows the matching session title, date/time and venue.
+
+These are recorded UI observations, not independently captured raw API logs, a fresh reviewer booking, or proof of the exact build installed during recording. The latest established physical G2/R1 baseline remains 0.9.2. The main cockpit demonstration is phone-side capture.
+
+The public cockpit.html and bridge.js were checked byte-for-byte against public 0.9.4 source on 2026-11-07. All six mocked automated suites passed again in that review. This does not establish the deployed Lambda version or installed Connect build.

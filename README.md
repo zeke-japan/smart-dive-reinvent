@@ -2,11 +2,11 @@
 
 Explore re:Invent sessions through Even G2 smart glasses and an R1 ring. After setup, selection replaces typing and speaking: check your schedule, find a session, read its abstract, explore AI explanations, and explicitly confirm a seat reservation.
 
-**Status:** independent hackathon prototype. Submission source: cockpit **0.9.4**, native helper **0.9.4 (12)**. The developer tested the core flow on real G2/R1 hardware with cockpit 0.9.2. Changes in 0.9.3–0.9.4 have automated coverage and rendered previews; fresh deployment, native compilation and device confirmation are still required. See [release notes](docs/RELEASE-0.9.4.md).
+**Status:** independent hackathon prototype. Submission source: cockpit **0.9.4**, native helper **0.9.4 (12)**. The developer tested the core flow on real G2/R1 hardware with cockpit 0.9.2. On 2026-11-07, the publicly served cockpit.html and bridge.js were verified byte-for-byte against this 0.9.4 source. All six automated test suites passed again against the public source. This static-asset check does not establish the deployed Lambda version, the installed native build, or the version used in the video. Device confirmation beyond the reported 0.9.2 baseline remains unverified here. See [release notes](docs/RELEASE-0.9.4.md).
 
-[Setup guide](https://d24cen4l6qtfpp.cloudfront.net/) · [Web cockpit](https://d24cen4l6qtfpp.cloudfront.net/cockpit.html) · [Architecture](docs/ARCHITECTURE.md) · [Validation](docs/VALIDATION.md)
+[Watch the demo](https://www.youtube.com/watch?v=8uWp1-DsD6g) · [Setup guide](https://d24cen4l6qtfpp.cloudfront.net/) · [Web cockpit](https://d24cen4l6qtfpp.cloudfront.net/cockpit.html) · [Architecture](docs/ARCHITECTURE.md) · [Validation](docs/VALIDATION.md)
 
-The live cockpit requires an iPhone running Smart Dive Connect and a Builder ID registered for re:Invent 2026. It is **not a login-free demo**. TestFlight and a demo video are not available at preparation time. A video link can be added after publication.
+The live cockpit requires an iPhone running Smart Dive Connect and a Builder ID registered for re:Invent 2026. It is **not a login-free demo**. A [demo video](https://www.youtube.com/watch?v=8uWp1-DsD6g) is available. TestFlight distribution is not available.
 
 ## Why smart glasses?
 
@@ -111,13 +111,13 @@ Select your Team and Bundle Identifier, connect your iPhone, and build/run. Nati
 
 Open the fixed G2 URL through the Even developer/prototype QR entry, following the guide. Copy the displayed connection code **in the Even phone app**, paste into Connect, sign in, send the connection, return to the original cockpit and check the connection within two minutes. For Web use, copy from and return to the original browser tab.
 
-Connect's manual Sign out and clear data clears its in-memory state and its Safari view website data. It does not revoke issued tokens or clear a separately connected cockpit; clear that connection separately. Tokens are held in memory; automatic refresh-token operation is not implemented. Reconnect after expiry or full cockpit reload. Never publish connection codes, tokens or authenticated snapshots.
+Connect's manual Sign out and clear data clears its in-memory state and its Safari view website data. It does not revoke issued tokens or clear a separately connected cockpit; clear that connection separately. Tokens are held in memory; automatic refresh-token operation is not implemented. Reconnect after expiry or full cockpit reload. Never publish connection codes, tokens or authenticated snapshots. A connection code contains a random 128-bit slot ID and a 256-bit AES key. The cockpit applies a 10-minute age limit from local code creation; the relay separately enforces a 120-second receive window from encrypted-payload storage. The 10-minute age is not a server-enforced expiry on the code itself, and database TTL cleanup need not be immediate. The relay receives a bearer token for authorization as well as the ciphertext; the AES key is not sent to the pairing API. Treat the full code as sensitive while the handoff is active.
 
 ## Demo and evidence
 
 The developer observed a live schedule of 15 reservations, venue/topic searches, an official abstract, a Bedrock Summary and a three-term Keyword Dive on iPhone/G2/R1. A separate reservation was verified in the official schedule. These are individual observations, not complete compatibility or conference field validation.
 
-The planned video captures the iPhone Even app preview with Japanese narration and English captions. It will identify that phone-side capture and separately state hardware testing. Repository images are **synthetic fixtures**; personal schedule screenshots are excluded. Video URL: to be added after publication.
+The [demo video](https://www.youtube.com/watch?v=8uWp1-DsD6g) is available. Phone-side cockpit previews should be distinguished from footage through the glasses; the earlier developer-reported G2/R1 hardware observations are a separate evidence source. The supplied final video was visually checked for a sessionFull result, a successful reservation result, and the matching official calendar entry; see [validation](docs/VALIDATION.md) for approximate offsets. The build used for the recording has not been independently established in this repository review. Repository images are **synthetic fixtures**; personal schedule screenshots are excluded. Demo: https://www.youtube.com/watch?v=8uWp1-DsD6g
 
 ## Limitations
 
